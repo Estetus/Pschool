@@ -1,0 +1,9 @@
+.title-search {
+    color: var(--white);
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 80px;
+    letter-spacing: -0.02em;
+    text-align: left;
+    margin: 0;
+    margin-bottom: 16px; }

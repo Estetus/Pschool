@@ -1,0 +1,22 @@
+.input-search {
+    width: 384px;
+    padding: 24px 58px;
+    border-radius: 12px;
+    border: 1px solid #323B54;
+    background: none;
+    margin-right: 8px;
+    color: var(--gray);
+    font-size: 14px;
+    line-height: 16px;
+
+}
+
+.logined {
+    padding: 24px 16px;
+    margin-bottom: 27px;
+}
+
+.invalid {
+    color: var(--purple);
+    border: 1px solid var(--purple);
+}
