@@ -5,6 +5,7 @@ import Input from "../Input/Input";
 import { UserContext } from "../../context/user.context";
 import { useLocalStorage } from "../hooks/user-localStorage";
 import type { UserProps } from "./Login.props";
+import MainText from '../MainText/MainText';
 
 function Login() {
   const [users, setUsers] = useLocalStorage<UserProps []>("data", []);
@@ -40,7 +41,7 @@ function Login() {
 
   return (
     <div>
-      <h2 className={styles["log-title"]}>Вход</h2>
+      <MainText text={''} title={'Вход'}></MainText>
       <form className={styles["main-text"]} onSubmit={handleLogin}>
         <Input
           appearance="login"

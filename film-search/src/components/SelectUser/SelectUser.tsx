@@ -3,9 +3,11 @@ import styles from "./SelectUser.module.css";
 import { UserContext } from "../../context/user.context";
 import { useLocalStorage } from "../hooks/user-localStorage";
 import type { UserProps } from "../Login/Login.props";
+import { NavLink } from "react-router-dom";
+import cn from "classnames";
 
 function SelectUser() {
-  const [users, setUsers] = useLocalStorage<UserProps []>("data", []);
+  const [users, setUsers] = useLocalStorage<UserProps[]>("data", []);
   const { loggedUser, setLoggedUser } = useContext(UserContext);
 
   const handleLogout = () => {
@@ -21,7 +23,7 @@ function SelectUser() {
           <li className={styles["header-nav__item"]}>{loggedUser.name}</li>
           <img
             className={styles["header-logo"]}
-            src="./User.svg"
+            src="../User.svg"
             alt="Пользователь"
           />
           <li className={styles["header-nav__item"]} onClick={handleLogout}>
@@ -29,14 +31,21 @@ function SelectUser() {
           </li>
         </>
       ) : (
-        <li className={styles["header-nav__item"]}>
+        <NavLink
+          to="/login"
+          className={({ isActive }) =>
+            cn(styles["header-nav__item"], {
+              [styles.active]: isActive,
+            })
+          }
+        >
           Войти
           <img
-            className={styles["header-nav-item__img"]}
-            src="./Login.svg"
+            src="../Login.svg"
             alt="Логотип"
+            className={styles["login-icon"]}
           />
-        </li>
+        </NavLink>
       )}
     </>
   );

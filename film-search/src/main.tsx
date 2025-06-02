@@ -1,10 +1,48 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Layout } from "./components/Layout/Layout";
+import { Menu } from "./pages/Menu/Menu";
+import { Favorites } from "./pages/Favorites/Favorites";
+import Login from "./components/Login/Login";
+import { Card } from "./pages/Card/Card";
+import { Error } from "./pages/Error/Error";
+import { UserContextProvider } from "./context/user.context";
 
-createRoot(document.getElementById('root')!).render(
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "/favorites",
+        element: <Favorites />,
+      },
+      {
+        path: "/",
+        element: <Menu />,
+      },
+      {
+        path: "/movie/:id",
+        element: <Card />
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/*",
+        element: <Error />,
+      },
+    ],
+  },
+]);
+
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
-  </StrictMode>,
-)
+    <UserContextProvider>
+      <RouterProvider router={router} />
+    </UserContextProvider>
+  </StrictMode>
+);

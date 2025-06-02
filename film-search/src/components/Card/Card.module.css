@@ -71,3 +71,7 @@
 .card-img_like {
     margin-right: 8px;
 }
+
+.card-link {
+  display: contents;
+}
