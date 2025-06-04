@@ -1,0 +1,10 @@
+.form-loupe {
+    position: absolute;
+    left: 20px;
+    top: 21px;
+}
+
+.main-text {
+    position: relative;
+    margin-bottom: 80px; 
+}

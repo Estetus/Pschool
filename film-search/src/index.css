@@ -10,13 +10,13 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --white: #EBEEF5;
-  --gray:  #8E95A9;
+  --gray: #8E95A9;
   --purple: #7B6EF6;
-  --text:  #A8AEBF;
+  --text: #A8AEBF;
   --white: #ffffff;
   --background-card: #20283ECC;
   --gold: #FFAD49;
-  --black:  #000000A6;
+  --black: #000000A6;
 }
 
 a {
@@ -24,13 +24,13 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
 
 body {
   margin: 0;
-  display: flex;
   min-width: 320px;
   min-height: 100vh;
   background: #121829;
@@ -52,9 +52,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -65,9 +67,11 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }

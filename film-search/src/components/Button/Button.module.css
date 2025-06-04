@@ -1,0 +1,20 @@
+.search-btn {
+    background: var(--purple);
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    padding: 16px 32px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.search-btn:hover {
+    background: #5145BD;
+    transition: all .3s ease-in-out;
+}
+
+.login-btn {
+    max-width: 201px;
+    margin-bottom: 50px; }
