@@ -1,0 +1,1 @@
+export const URL = 'https://search.imdbot.workers.dev'

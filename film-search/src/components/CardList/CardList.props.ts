@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
+import type { Film } from '../../interfaces/film.interface';
 
 export interface CardListProps {
-    children: ReactNode
+    films: Film []
 }

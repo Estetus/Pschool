@@ -9,6 +9,8 @@ import Login from "./components/Login/Login";
 import { Card } from "./pages/Card/Card";
 import { Error } from "./pages/Error/Error";
 import { UserContextProvider } from "./context/user.context";
+import axios from "axios";
+import { URL } from "./components/helpers/API";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +27,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/movie/:id",
-        element: <Card />
+        element: <Card />,
+        loader: async ({ params }) => {
+          const { data } = await axios.get(`${URL}/?tt=${params.id}`);
+          return data;
+        },
       },
       {
         path: "/login",

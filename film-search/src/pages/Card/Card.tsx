@@ -1,30 +1,33 @@
-import { useParams } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import styles from "./Card.module.css";
-import { INITIAL_DATE } from "../../Mocks/Mocks";
+import type { CardInProps } from "./CardIn.props";
 
 export function Card() {
-  const { id } = useParams();
+  const data = useLoaderData() as { short: CardInProps };
 
-  const movie = INITIAL_DATE.find((item) => item.id === id);
-
-  if (!movie) {
+  if (!data.short) {
     return <div>Фильм не найден</div>;
   }
+  const { ...props } = data.short;
+
   return (
     <div className={styles["card-film"]}>
       <div className={styles["card-head"]}>
         <p className={styles["card-search"]}>Поиск фильмов</p>
-        <h1 className={styles["card-title"]}> {movie.title}</h1>
+        <h1 className={styles["card-title"]}> {props.name}</h1>
       </div>
       <div className={styles["film-container"]}>
-        <div className={styles["card-info"]}>
-          <div className={styles["card-img"]}>
-            <img src={`/${movie.img}`} alt="" />
-          </div>
+        <div className={styles["card-img"]}>
+          <img src={props.image} alt="Постер фильма" />
+        </div>
+        <div className={styles["card-description"]}>
+          <p className={styles["card-description_text"]}>{props.description}</p>
           <div className={styles["card-favorites"]}>
             <div className={styles["film-rating"]}>
               <img className={styles["card-icon"]} src="../star.svg" alt="" />
-              <span className={styles["card-rating"]}>{movie.rating}</span>
+              <span className={styles["card-rating"]}>
+                {props.aggregateRating?.ratingValue}
+              </span>
             </div>
             <p className={styles["card-like"]}>
               <img
@@ -35,10 +38,36 @@ export function Card() {
               В избранное
             </p>
           </div>
+          <div className={styles["card-description_details"]}>
+            <span>Тип</span>
+            <p>{props["@type"]}</p>
+          </div>
+          <div className={styles["card-description_details"]}>
+            <span>Дата выхода</span>
+            <p>{props.datePublished}</p>
+          </div>
+          <div className={styles["card-description_details"]}>
+            <span>Длительность</span>
+            <p>{"мин"}</p>
+          </div>
+          <div className={styles["card-description_details"]}>
+            <span>Жанр</span>
+            <p>{props.genre.join(", ")}</p>
+          </div>
         </div>
       </div>
       <p className={styles["card-search"]}>Отзывы</p>
-      <div className={styles["film-desc"]}></div>
+      <div className={styles["film-desc"]}>
+        <div className={styles["film-desc_title"]}>
+          <p className={styles["film-desc_title__text"]}>
+            {props.review?.name}
+          </p>
+          <p className={styles["film-desc_title__data"]}>
+            {props.review?.dateCreated}
+          </p>
+        </div>
+        {props.review?.reviewBody}
+      </div>
     </div>
   );
 }

@@ -3,3 +3,23 @@
   margin: 0 auto;
 }
 
+.errorContent {
+  display: flex;
+}
+
+.errorMessage {
+  color: var(--purple);
+  padding: 18px 16px;
+  border-radius: 4px;
+  margin: 0;
+  max-width: 200px;
+  border: none;
+  font-size: 14px;
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease, max-height 0.3s ease;
+}
+
+.errorMessage.show {
+  opacity: 1;
+}
