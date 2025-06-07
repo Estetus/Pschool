@@ -3,16 +3,18 @@ import styles from "./SelectUser.module.css";
 import { UserContext } from "../../context/user.context";
 import { useLocalStorage } from "../hooks/user-localStorage";
 import type { UserProps } from "../Login/Login.props";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import cn from "classnames";
 
 function SelectUser() {
   const [users, setUsers] = useLocalStorage<UserProps[]>("data", []);
   const { loggedUser, setLoggedUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     const updatedUsers = users.map((user) => ({ ...user, isLogined: false }));
     setUsers(updatedUsers);
+    navigate("/login");
     setLoggedUser(null);
   };
 
