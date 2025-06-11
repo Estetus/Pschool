@@ -7,15 +7,17 @@ function Card(props: CardProps) {
     <Link to={`/movie/${props.id}`} className={styles["card-link"]}>
       <div className={styles["card-film"]}>
         <img className={styles["card-img"]} src={props.img} alt="Постер" />
-        <p className={styles["card-title"]}>{props.title}</p>
+        <div className={styles["card-film-bottom"]}>
+          <p className={styles["card-title"]}>{props.title}</p>
+          <p className={styles["card-like"]}>
+            <img className={styles["card-img_like"]} src="./like.svg" alt="" />В
+            избранное
+          </p>
+        </div>
         <span className={styles["card-rating"]}>
           <img className={styles["card-icon"]} src="./star.svg" alt="" />
           {props.rating}
         </span>
-        <p className={styles["card-like"]}>
-          <img className={styles["card-img_like"]} src="./like.svg" alt="" />В
-          избранное
-        </p>
       </div>
     </Link>
   );

@@ -1,7 +1,7 @@
 
 export interface CardProps {
     title: string,
-    rating: string,
+    rating: number,
     img: string,
     id: string
 }

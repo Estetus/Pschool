@@ -1,27 +1,18 @@
-import { useState, type ChangeEvent } from "react";
+import { type ChangeEvent } from "react";
 import Button from "../Button/Button";
 import styles from "./Search.module.css";
 import Input from "../Input/Input";
+import type { SearchProps } from './Search.props';
 
 
-function Search() {
-  const [inputData, setInputData] = useState("");
-
+function Search({ inputData, setInputData, seacrhFilm }: SearchProps) {
+  
   const inputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputData(e.target.value);
   };
 
-  const seacrhItem = (e: ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const formProps = Object.fromEntries(formData);
-    setInputData("");
-    console.log(formProps);
-  };
-
   return (
-    
-    <form className={styles["main-text"]} onSubmit={seacrhItem}>
+    <form className={styles["main-text"]} onSubmit={seacrhFilm}>
       <img src="./Left Icon.svg" className={styles["form-loupe"]} />
       <Input
         type="text"
@@ -32,7 +23,7 @@ function Search() {
         placeholder="Введите название"
       />
 
-      <Button  text="Искать" />
+      <Button text="Искать" />
     </form>
   );
 }

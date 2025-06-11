@@ -9,11 +9,18 @@ import Login from "./components/Login/Login";
 import { Card } from "./pages/Card/Card";
 import { Error } from "./pages/Error/Error";
 import { UserContextProvider } from "./context/user.context";
+import axios from "axios";
+import { URL } from "./components/helpers/API";
+import { RequireAuth } from "./components/helpers/RequireAuth";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <RequireAuth>
+        <Layout />
+      </RequireAuth>
+    ),
     children: [
       {
         path: "/favorites",
@@ -25,17 +32,21 @@ const router = createBrowserRouter([
       },
       {
         path: "/movie/:id",
-        element: <Card />
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/*",
-        element: <Error />,
+        element: <Card />,
+        loader: async ({ params }) => {
+          const { data } = await axios.get(`${URL}/?tt=${params.id}`);
+          return data;
+        },
       },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/*",
+    element: <Error />,
   },
 ]);
 
