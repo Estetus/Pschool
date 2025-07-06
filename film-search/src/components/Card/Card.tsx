@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 function Card(props: CardProps) {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const currentUsername = useSelector((state: RootState) => state.user.name)
+  const currentUsername = useSelector((state: RootState) => state.user.name);
   const isFavorite = useSelector((state: RootState) => {
     if (!currentUsername) return false;
     const userFavorites = state.card.favorites[currentUsername] || [];
@@ -29,7 +29,7 @@ function Card(props: CardProps) {
     if (isFavorite) {
       dispatch(
         cardActions.remove({
-          username: currentUsername, 
+          username: currentUsername,
           itemId: props.id,
         })
       );
@@ -43,10 +43,10 @@ function Card(props: CardProps) {
             rating: props.rating,
             img: props.img,
             count: 1,
-            isFavorite: true,
           },
         })
       );
+      console.log(props.id);
     }
   };
 

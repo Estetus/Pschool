@@ -1,7 +1,7 @@
 export interface Film {
   "#TITLE": string
   "#YEAR": number
-  "#IMDB_ID": number
+  "#IMDB_ID": string
   "#RANK": number
   "#ACTORS": string
   "#AKA": string

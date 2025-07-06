@@ -103,6 +103,8 @@
   align-items: center;
   cursor: pointer;
   transition: all .3s ease-in-out;
+  background: none;
+  border: none;
 }
 
 .card-like:hover {

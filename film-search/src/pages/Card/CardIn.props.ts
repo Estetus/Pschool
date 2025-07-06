@@ -1,8 +1,11 @@
 export interface CardInProps {
+  imdbId: string
+  id: string
+  count: number
   url: string
   "@type": string
   name: string
-  image: string
+  image: string;
   description: string
   review?: {
     reviewBody: string;
@@ -10,13 +13,14 @@ export interface CardInProps {
     name:string
   };
   aggregateRating?: {
-    ratingValue: string | number;
+    ratingValue: number;
   };
   datePublished:string;
-  runtime?: {
-			seconds?: number
-  }
-  genre: string[]
+  duration: string;
+    genre: string[];
+    top?: {
+      id: string;
+    };
 
   
 }

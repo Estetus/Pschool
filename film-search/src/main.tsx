@@ -8,8 +8,6 @@ import { Favorites } from "./pages/Favorites/Favorites";
 import Login from "./components/Login/Login";
 import { Card } from "./pages/Card/Card";
 import { Error } from "./pages/Error/Error";
-import axios from "axios";
-import { URL } from "./components/helpers/API";
 import { RequireAuth } from "./components/helpers/RequireAuth";
 import { Provider } from 'react-redux';
 import { store } from './components/store/store';
@@ -34,10 +32,6 @@ const router = createBrowserRouter([
       {
         path: "/movie/:id",
         element: <Card />,
-        loader: async ({ params }) => {
-          const { data } = await axios.get(`${URL}/?tt=${params.id}`);
-          return data;
-        },
       },
     ],
   },
