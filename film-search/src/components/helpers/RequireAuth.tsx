@@ -1,11 +1,12 @@
-import { useContext, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { Navigate } from "react-router-dom";
-import { UserContext } from "../../context/user.context";
+import { useSelector } from "react-redux";
+import type { RootState } from "../store/store";
 
 export const RequireAuth = ({ children }: { children: ReactNode }) => {
-  const { loggedUser } = useContext(UserContext);
+  const { isLogined } = useSelector((s: RootState) => s.user);
 
-  if (!loggedUser?.isLogined) {
+  if (!isLogined) {
     return <Navigate to="/login" replace />;
   }
   return children;

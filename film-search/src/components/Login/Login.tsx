@@ -1,56 +1,43 @@
-import {
-  useContext,
-  useEffect,
-  useState,
-  type ChangeEvent,
-  type FormEvent,
-} from "react";
-import Button from "../Button/Button";
+import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
 import styles from "./Login.module.css";
-import Input from "../Input/Input";
-import { UserContext } from "../../context/user.context";
-import { useLocalStorage } from "../hooks/user-localStorage";
-import type { UserProps } from "./Login.props";
-import MainText from "../MainText/MainText";
-import { Layout } from "../Layout/Layout";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../store/store";
+import { userActions } from "../store/user.slice";
+import { Layout } from "../Layout/Layout";
+import MainText from "../MainText/MainText";
+import Input from "../Input/Input";
+import Button from "../Button/Button";
 
 function Login() {
-  const [users, setUsers] = useLocalStorage<UserProps[]>("data", []);
-  const [currentInput, setCurrentInput] = useState("");
-  const { setLoggedUser } = useContext(UserContext);
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
-
-  const inputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setCurrentInput(e.target.value);
-  };
+  const dispatch = useDispatch<AppDispatch>();
+  const isLoggedIn = useSelector((s: RootState) => s.user.isLogined);
 
   useEffect(() => {
-    if (users && users.length > 0) {
-      const user = users.find((user) => user.isLogined);
-      setLoggedUser(user || null);
+    if (isLoggedIn) {
+      navigate("/");
     }
-  }, [users, setLoggedUser]);
+  }, [isLoggedIn, navigate]);
+
+  const inputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
+  };
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    if (!currentInput) return;
-    const newUser: UserProps = {
-      name: currentInput.trim(),
-      isLogined: true,
-    };
-    const updatedUsers = users
-      ? users.map((user) => ({
-          ...user,
-          isLogined: false,
-        }))
-      : [];
-    setUsers([...updatedUsers, newUser]);
-    setLoggedUser(newUser);
-    setCurrentInput("");
-    navigate("/");
+    const trimmedUsername = username.trim();
+    if (!trimmedUsername) return;
+    dispatch(
+      userActions.loginUser({
+        name: trimmedUsername,
+      })
+    );
+
+    setUsername("");
   };
+
 
   return (
     <div>
@@ -62,7 +49,7 @@ function Login() {
           type="text"
           isValid={true}
           name="Имя пользователя"
-          value={currentInput}
+          value={username}
           onChange={inputChange}
           placeholder="Ваше имя"
         />

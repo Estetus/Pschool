@@ -1,28 +1,26 @@
-import { useContext } from "react";
 import styles from "./SelectUser.module.css";
-import { UserContext } from "../../context/user.context";
-import { useLocalStorage } from "../hooks/user-localStorage";
-import type { UserProps } from "../Login/Login.props";
 import { NavLink, useNavigate } from "react-router-dom";
 import cn from "classnames";
+import { useDispatch, useSelector } from 'react-redux';
+import type { RootState } from '../store/store';
+import { userActions } from '../store/user.slice';
 
 function SelectUser() {
-  const [users, setUsers] = useLocalStorage<UserProps[]>("data", []);
-  const { loggedUser, setLoggedUser } = useContext(UserContext);
+  const dispatch = useDispatch()
   const navigate = useNavigate();
 
+  const {name, isLogined} = useSelector((s: RootState) => s.user)
+
   const handleLogout = () => {
-    const updatedUsers = users.map((user) => ({ ...user, isLogined: false }));
-    setUsers(updatedUsers);
+    dispatch(userActions.logoutUser())
     navigate("/login");
-    setLoggedUser(null);
   };
 
   return (
     <>
-      {loggedUser ? (
+      {isLogined ? (
         <>
-          <li className={styles["header-nav__item"]}>{loggedUser.name}</li>
+          <li className={styles["header-nav__item"]}>{name}</li>
           <img
             className={styles["header-logo"]}
             src="../User.svg"
